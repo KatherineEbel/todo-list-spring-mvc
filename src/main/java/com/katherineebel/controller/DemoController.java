@@ -13,4 +13,12 @@ public class DemoController {
     public String hello() {
         return "hello";
     }
+
+    // http://localhost:8080/todo-list/welcome
+    // prefix + name + suffix
+    // -- resolves to --> /WEB-INF/view/welcome.jsp
+    @GetMapping("welcome")
+    public String welcome() {
+        return "welcome";
+    }
 }
