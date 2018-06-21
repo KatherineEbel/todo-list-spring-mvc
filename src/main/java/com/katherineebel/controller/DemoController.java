@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -28,11 +29,13 @@ public class DemoController {
     }
 
     // http://localhost:8080/todo-list/welcome
+    // http://localhost:8080/todo-list/welcome?user=Kathy&age=41
     @GetMapping("welcome")
     // prefix + name + suffix
     // -- resolves to --> /WEB-INF/view/welcome.jsp)
-    public String welcome(Model model) {
-        model.addAttribute("helloMessage", demoService.getHelloMessage("Kathy"));
+    public String welcome(@RequestParam String user, @RequestParam int age, Model model) {
+        model.addAttribute("age", age);
+        model.addAttribute("helloMessage", demoService.getHelloMessage(user));
         log.info("model= {}", model);
         return "welcome";
     }
